@@ -6,6 +6,8 @@ $db_config = [
 	//Localhost
 	"development" => [
 						"host" => "localhost",
+						"port" => "3306", //default 3306, change it to your mysql server port
+						"charset" => "utf-8", //default utf-8, change it to your db collation
 						"database" => "test",
 						"username" => "root",
 						"password" => ""
@@ -13,6 +15,8 @@ $db_config = [
 	//Server
 	"production"  => [
 						"host" => "",
+						"port" => "3306", //default 3306, change it to your mysql server port
+						"charset" => "utf-8", //default utf-8, change it to your db collation
 						"database" => "",
 						"username" => "",
 						"password" => ""
@@ -41,7 +45,7 @@ class DB{
 		}
 
 		try {
-			$this->dbh = new PDO("mysql:host=".$config['host'].";dbname=".$config['database'].";charset=utf8", $config['username'], $config['password'] );
+			$this->dbh = new PDO("mysql:host={$config['host']};dbname={$config['database']};charset={$config['charset']}",$config['username'],$config['password']);
 			$this->dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
 			$db_config = null;
 		} catch (Exception $e) {
